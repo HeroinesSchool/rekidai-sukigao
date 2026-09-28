@@ -1,1 +1,0 @@
-# rekidai-sukigao
