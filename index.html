@@ -17,7 +17,7 @@ button{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh;padding:18
 </style>
 </head>
 <body><main class="app">
-<header class="hero"><div class="eyebrow">HEROINES SCHOOL</div><h1>歴代好き顔9選</h1><p>歴代47人から、直感で「好きな顔」を選んでいく診断。最後は2択比較であなたのTOP9を決定します。</p></header>
+<header class="hero"><div class="eyebrow">HEROINES SCHOOL</div><h1>歴代好き顔9選</h1><p>歴代54人から、直感で「好きな顔」を選んでいく診断。最後は2択比較であなたのTOP9を決定します。</p></header>
 <div id="steps" class="stepbar hidden"><div class="step" data-s="1"></div><div class="step" data-s="2"></div><div class="step" data-s="3"></div><div class="step" data-s="4"></div></div>
 <section id="home" class="panel"><h2 class="section-title">診断をはじめる</h2><p class="sub">第1段階は54人を重複なしで6グループに分け、好きな顔を何人でも選択できます。</p><button id="start" class="primary wide">スタート</button><div class="spacer"></div><button id="resume" class="secondary wide hidden">続きから</button><p class="note">途中経過はこの端末に自動保存されます。TOP9を作るため、第1段階では合計12人以上を選んでください。</p></section>
 <section id="stage1" class="panel hidden"><div class="counter" id="s1count"></div><h2 class="section-title">第1段階｜好きな顔を全部選択</h2><p class="sub">このグループ内で好きな顔を何人でもタップ。人数制限はありません。</p><div id="s1grid" class="grid"></div><div class="spacer"></div><button id="s1next" class="primary wide">このメンバーで進む</button><p id="s1msg" class="note"></p></section>
@@ -39,7 +39,7 @@ const APP_VERSION='rekidai-v1';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const byId=id=>MEMBERS.find(m=>m.id===id); const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 let S=null;
-function fresh(){const ids=shuffle(MEMBERS.map(m=>m.id));return{stage:1,groups:[ids.slice(0,10),ids.slice(10,20),ids.slice(20,29),ids.slice(29,38),ids.slice(38,47),ids.slice(47,55)],g:0,stage1Selected:[],temp:[],s2:null,s3:null,ranking:[],submitted:false}}
+function fresh(){const ids=shuffle(MEMBERS.map(m=>m.id));return{stage:1,groups:[ids.slice(1,9),ids.slice(9,18),ids.slice(18,27),ids.slice(27,36),ids.slice(36,45),ids.slice(45,55)],g:0,stage1Selected:[],temp:[],s2:null,s3:null,ranking:[],submitted:false}}
 function save(){localStorage.setItem(KEY,JSON.stringify(S))} function load(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
 function show(id){['home','stage1','stage2','stage3','result'].forEach(x=>$('#'+x).classList.toggle('hidden',x!==id));$('#steps').classList.toggle('hidden',id==='home');const map={stage1:1,stage2:2,stage3:3,result:4};$$('.step').forEach(x=>x.classList.toggle('on',Number(x.dataset.s)<=map[id]))}
 function card(m,selected=false,badge=''){return `<div class="card ${selected?'selected':''}" data-id="${m.id}">${badge?`<div class="badge ${badge==='2'?'second':''}">${badge}</div>`:''}<img src="${m.image}" alt="${m.name}"><div class="meta"><div class="name">${m.name}</div><div class="group">${m.group}</div></div></div>`}
